@@ -83,7 +83,7 @@ As seen below, the confusion between Shirts and T-shirts has been minimized.
 
 The model shows healthy convergence without signs of overfitting, thanks to Early Stopping and Learning Rate Scheduling.
 
-![Training Metrics](training_metrics.png)
+![Training Metrics](training_graphs.png)
 *> Figure 3: Training and Validation Loss/Accuracy curves demonstrating stable convergence.*
 
 ---

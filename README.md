@@ -46,48 +46,63 @@ To force the model to pay attention to the underperforming class, a higher "loss
 class_weight_dict[6] *= 2.0  # High penalty for misclassifying Shirts
 class_weight_dict[0] *= 1.2  # Moderate penalty for T-shirts
 ```
-2. Augmentation Optimization
-Initial experiments showed that aggressive data augmentation (e.g., rotation_range=20) destroyed subtle features like collars and buttons, which are crucial for distinguishing shirts.
 
-Action: Parameters were reduced to "micro-adjustments".
+### 2. Augmentation Optimization
 
-rotation_range: Reduced to 5 degrees.
+Initial experiments showed that aggressive data augmentation (e.g., `rotation_range=20`) destroyed subtle features like collars and buttons, which are crucial for distinguishing shirts.
 
-shear_range: Minimized to preserve structural integrity.
+*   **Action:** Parameters were reduced to "micro-adjustments".
+*   `rotation_range`: Reduced to 5 degrees.
+*   `shear_range`: Minimized to preserve structural integrity.
 
-3. Hybrid CNN Architecture
-Batch Normalization: Added after every convolution to stabilize weights.
+### 3. Hybrid CNN Architecture
 
-Progressive Dropout: (0.25 -> 0.35 -> 0.50) to prevent overfitting while increasing capacity.
+*   **Batch Normalization:** Added after every convolution to stabilize weights.
+*   **Progressive Dropout:** (0.25 -> 0.35 -> 0.50) to prevent overfitting while increasing capacity.
 
-📊 Results
+---
+
+## 📊 Results
+
 The engineering interventions successfully corrected the model's perception.
-Metric,Baseline Model,Final Weighted Model,Impact
-Shirt (Class 6) Recall,~71%,~88%,🚀 Significant Improvement
-Overall Accuracy,91.5%,90.5%,-1.0% (Expected Trade-off)
-Model Balance,Biased,Balanced,✅
 
-Confusion Matrix Analysis
+| Metric | Baseline Model | Final Weighted Model | Impact |
+| :--- | :--- | :--- | :--- |
+| **Shirt (Class 6) Recall** | ~71% | **~88%** | 🚀 **Significant Improvement** |
+| **Overall Accuracy** | 91.5% | 90.5% | -1.0% (Expected Trade-off) |
+| **Model Balance** | Biased | **Balanced** | ✅ |
+
+### Confusion Matrix Analysis
+
 As seen below, the confusion between Shirts and T-shirts has been minimized.
 
-> Figure 2: Final Confusion Matrix. The model now correctly identifies Shirts with much higher precision.
+![Final Confusion Matrix](confusion_matrix_after.png)
+*> Figure 2: Final Confusion Matrix. The model now correctly identifies Shirts with much higher precision.*
 
-Training Stability
+### Training Stability
+
 The model shows healthy convergence without signs of overfitting, thanks to Early Stopping and Learning Rate Scheduling.
 
-> Figure 3: Training and Validation Loss/Accuracy curves demonstrating stable convergence.
+![Training Metrics](training_metrics.png)
+*> Figure 3: Training and Validation Loss/Accuracy curves demonstrating stable convergence.*
 
-🛠️ Running the Project
+---
+
+## 🛠️ Running the Project
+
 Clone the repository and run the main script:
-git clone [https://github.com/HimmetDemir45/fashion-mnist.git](https://github.com/HimmetDemir45/fashion-mnist.git)
+
+```bash
+git clone https://github.com/HimmetDemir45/fashion-mnist.git
 cd fashion-mnist
-pip install -r requirements.txt
+pip install numpy matplotlib seaborn tensorflow scikit-learn 
 python Fashion_MNIST_Solution.py
+```
 
-👨‍💻 Author
-Himmet
+## 👨‍💻 Author
 
-This project is open-source and developed for educational purposes.
-# Strategic Weighting Implementation
-class_weight_dict[6] *= 2.0  # High penalty for misclassifying Shirts
-class_weight_dict[0] *= 1.2  # Moderate penalty for T-shirts
+*   **Himmet**
+
+---
+
+*This project is open-source and developed for educational purposes.*
